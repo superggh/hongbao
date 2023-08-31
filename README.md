@@ -1,8 +1,8 @@
-# gongxu_robots
+# 飞机/电报/telegram/tg红包扫雷机器人
 飞机/电报/telegram/tg红包扫雷机器人
 测试频道：[@iluobo](https://t.me/iluobo)
 机器人技术交流群组：[@iluoboya](https://t.me/iluoboya)
-机器人地址：[@deepluobo_bot](https://t.me/yinghai_bot)
+机器人地址：[@yinghai_bot](https://t.me/yinghai_bot)
 作者飞机号：[@toumingde](https://t.me/toumingde)
 红包扫雷机器人基础版包含功能：
 ⭐️ TG群红包扫雷机器人
@@ -21,4 +21,4 @@
 ![image](https://github.com/black-dotcom/hongbao/assets/62455479/f14439d0-4dc3-4ffc-b7f1-7607063779b4)
 
 
-飞机红包扫雷机器人 测试频道：[@iluobo](https://t.me/iluobo) 机器人技术交流群组：[@iluoboya](https://t.me/iluoboya) 机器人地址：[@deepluobo_bot](https://t.me/yinghai_bot)
+飞机红包扫雷机器人 测试频道：[@iluobo](https://t.me/iluobo) 机器人技术交流群组：[@iluoboya](https://t.me/iluoboya) 机器人地址：[@yinghai_bot](https://t.me/yinghai_bot)

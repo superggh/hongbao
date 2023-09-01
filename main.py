@@ -12,33 +12,6 @@ from sqlalchemy import func, Date
 
 
 
-def qidong():
-    global global_data
-    # 读取数据库配置信息
-    session = Session()
-    session.expire_all()
-    try:
-        objs = session.query(Conf).all()
-    except Exception as e:
-        print(e)
-        session.close()
-        return
-    for obj in objs:
-        if obj.typestr == "float":
-            value = float(obj.value)
-        elif obj.typestr == "list":
-            value = json.loads(obj.value)
-        elif obj.typestr == "int":
-            value = int(obj.value)
-        elif obj.typestr == "str":
-            value = str(obj.value)
-        else:
-            value = obj.value
-        global_data[obj.name] = value
-
-
-qidong()
-
 commands = [
     BotCommand(command="start", description="开始使用机器人"),
     BotCommand(command="invite", description="创建邀请链接"),

@@ -5,9 +5,9 @@ Ip = "127.0.0.1"
 Database = "usdt"
 
 # 管理员tgID
-Admin_id = "1707841429"
+Admin_id = " 5176890779"
 # 管理员用户名
-Admin_name = "toumingde"
+Admin_name = "apple_hook"
 # 群组ID
 Group_id = "-1001948357949"
 # 群组用户名

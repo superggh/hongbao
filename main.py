@@ -1,16 +1,13 @@
-from telegram import InlineKeyboardButton, InlineKeyboardMarkup, KeyboardButton, ReplyKeyboardMarkup, ParseMode, \
-    BotCommand
-from telegram.ext import Updater, CommandHandler, CallbackQueryHandler, MessageHandler, Filters, CallbackContext, \
-    ChatMemberHandler
+from telegram import InlineKeyboardButton, InlineKeyboardMarkup, KeyboardButton, ReplyKeyboardMarkup, BotCommand
+from telegram.constants import ParseMode
+from telegram.ext import Updater, CommandHandler, CallbackQueryHandler, MessageHandler, filters, CallbackContext, ChatMemberHandler
 import telegram, base64, os, time
-from tools import get_session, Record, Recharge, register, User, Session, test_str, find_str, get_code, Holding, \
-    distribute_red_packet, Snatch, Return_log, Reward_log, shunzi3, shunzi4, is_baozi3, is_baozi4, Conf, Withdrawal, \
-    Chou_li
+# from tools import get_session, Record, Recharge, register, User, Session, test_str, find_str, get_code, Holding, distribute_red_packet, Snatch, Return_log, Reward_log, shunzi3, shunzi4, is_baozi3, is_baozi4, Conf, Withdrawal,  Chou_li
 from datetime import datetime, date
 import random, threading, json
 from sqlalchemy import func, Date
 
-
+ 
 
 commands = [
     BotCommand(command="start", description="开始使用机器人"),
@@ -19,8 +16,8 @@ commands = [
     BotCommand(command="recharge", description="自动充值"),
     BotCommand(command="wanfa", description="玩法"),
 ]
-TOKEN = global_data.get("TOKEN")
-updater = Updater(token=TOKEN, use_context=True, request_kwargs=proxy_config)
+TOKEN = "6388824981:AAGLOdFPszKUVV9hkh-ino6B0lZ3FpASHSI"
+updater = Updater(token=TOKEN, use_context=True )
 updater.bot.set_my_commands(commands)
 dispatcher = updater.dispatcher
 
@@ -40,6 +37,7 @@ def turn_off(update, context):
 # 取消订单
 def move_order(update, context):
     print("开始取消订单")
+    return
     session = get_session()
     info = update.callback_query.to_dict()
     # tg的id
@@ -90,6 +88,7 @@ def move_order(update, context):
 
 
 def create_order(update, context):
+    return
     session = get_session()
     Admin_name = global_data.get("Admin_name", "toumingde")
     # 我的钱包地址
@@ -206,6 +205,7 @@ def create_order(update, context):
 
 def recharge(update, context):
     print("触发充值！")
+    return
     Group_id = global_data.get("Group_id")
     if Group_id == str(update.effective_chat.id):
         message_id = update.message.message_id
@@ -247,6 +247,7 @@ def build_menu(buttons, n_cols=2, header_buttons=None, footer_buttons=None):
 
 
 def today_record(update, context):
+    return
     New_reward = global_data.get("New_reward")
     Chou = global_data.get("Chou")
     Dai_chou = global_data.get("Dai_chou")
@@ -360,6 +361,7 @@ def today_record(update, context):
 
 
 def alert(update, context):
+    return
     session = Session()
     session.expire_all()
     # 用户id
@@ -397,6 +399,7 @@ def alert(update, context):
 
 # 查看余额
 def yue(update, context):
+    return
     session = Session()
     session.expire_all()
     info = update.callback_query.to_dict()
@@ -449,6 +452,7 @@ def start(update, context):
     keyboard = InlineKeyboardMarkup([buttons_row])
     context.bot.send_message(chat_id=update.message.chat_id,
                              text="👏👏 欢迎 ID: %s" % user_id, reply_markup=keyboard)
+    return
     # 判断是否是新用户
     session = Session()
     session.expire_all()
@@ -549,26 +553,28 @@ def send_help(update, context):
     context.bot.send_message(chat_id=update.message.chat_id, text=content, reply_markup=keyboard)
 
 
-def invite(update, context):
+async def invite(update, context):
+  
     chat_id = update.message.chat_id
     # 生成带有邀请者ID参数的邀请链接
     user_id = update.message.from_user.id
-    session = Session()
-    session.expire_all()
+ 
     try:
-        user = session.query(User).filter_by(t_id=user_id).first()
+        user = None
     except Exception as e:
         print(e)
         user = None
     if not user:
         update.message.reply_text(f"请使用机器人注册个人信息！ @yinghai_bot")
         return
-    invite_lj = user.invite_lj
-    invite_link = f"https://t.me/yinghai_bot?start={invite_lj}"
-    update.message.reply_text(f"您的专属链接为: \n{invite_link}\n(用户加入自动成为您的下级用户)")
+    # invite_lj = user.invite_lj
+    invite_lj = "asdfef"
+    invite_link = f"https://t.me/redpock_bot?start={invite_lj}"
+    await update.message.reply_text(f"您的专属链接为: \n{invite_link}\n(用户加入自动成为您的下级用户)")
 
 
 def wanfa(update, context):
+    print('wanfa')
     Channel_name = global_data.get("Channel_name", "yingsheng001")
     Group_id = global_data.get("Group_id", "-1001948357949")
     Bot_name = global_data.get("Bot_name", "yinghai_bot")
@@ -603,6 +609,8 @@ def wanfa(update, context):
 
 
 def adminrecharge(update, context):
+    print('adminrecharge')
+    return
     user_id = update.message.from_user["id"]
     chat_id = update.message.chat.id
     Admin_li = global_data.get("Admin_li")
@@ -657,6 +665,8 @@ def adminrecharge(update, context):
 
 
 def xiafen(update, context):
+    print('xiafen')
+    return
     user_id = update.message.from_user["id"]
     chat_id = update.message.chat.id
     Admin_li = global_data.get("Admin_li")
@@ -717,6 +727,8 @@ def xiafen(update, context):
 
 
 def handle_user_reply(update, context):
+    print('reply')
+    return
     Admin_group_id = global_data.get("Admin_group_id")
     Num = global_data.get("Num")
     Channel_name = global_data.get("Channel_name")
@@ -840,6 +852,8 @@ def handle_user_reply(update, context):
 
 
 def update_env(update, content):
+    print('update_env')
+    return
     global global_data
     # 读取数据库配置信息
     session = Session()
@@ -867,6 +881,8 @@ def update_env(update, content):
 
 
 def today_data(update, context):
+    print('total_date')
+    return
     user_id = update.message.from_user["id"]
     chat_id = update.message.chat.id
     Admin_li = global_data.get("Admin_li")
@@ -935,7 +951,7 @@ dispatcher.add_handler(CommandHandler('xiafen', xiafen))
 dispatcher.add_handler(CommandHandler('update', update_env))
 dispatcher.add_handler(CommandHandler('today', today_data))
 # 监听发红包
-dispatcher.add_handler(MessageHandler(Filters.text & ~Filters.command, handle_user_reply))
+dispatcher.add_handler(MessageHandler(filters.text & ~filters.command, handle_user_reply))
 
 if __name__ == '__main__':
     print('开始运行机器人.....')

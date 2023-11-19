@@ -189,9 +189,9 @@ async def yue(update, context):
             print("注册失败")
             # session.close()
             return
-    fistname = "user.firstname"
+
     balance = float(10000) / 100
-    content = "%s\n%s\n---------------------------------\nID号：%s\n余额：%sU\n" % (fistname, name, user_id, balance)
+    content = "%s\n---------------------------------\nID号：%s\n余额：%sU\n" % ( name, user_id, balance)
     await query.answer(content, show_alert=True)
 
 
